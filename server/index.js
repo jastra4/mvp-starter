@@ -12,7 +12,7 @@ app.use(bodyParser());
 app.post('/items', function(req, res) {
   console.log('server received request from client: ', req.body);
   queryAPI.getSearchResults(req.body, function(results) {
-  	console.log('server received results from service: ', results);
+  	console.log('server received results from service: ', results.items.length, results.items[0]);
   //   db.save(results);
     res.sendStatus(201);
   });
@@ -32,3 +32,6 @@ app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
 
+// results.items[0].title
+// results.items[0].link
+// results.items[0].snippet

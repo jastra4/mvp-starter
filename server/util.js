@@ -1,18 +1,19 @@
 const request = require('request');
+const config = require('../config.js');
 
 function getSearchResults(searchTerm, callback) {
-  //console.log('sever helper got: ', searchTerm);
+  console.log('request helper received: ', searchTerm.term);
   searchTerm = searchTerm.term;
-  console.log('helper: ', searchTerm);
+
   let options = {
-    url: 'https://www.googleapis.com/customsearch/v1?' + searchTerm,
-    headers: {
-      'User-Agent': 'request',
-      'Authorization': `token ${config.TOKEN}`
-    }
+    url: 'https://www.googleapis.com/customsearch/v1?key=' + config.token +'&cx=' + config.sid + '&q=' + searchTerm,
+    // headers: {
+    //   'User-Agent': 'request',
+    //   'Authorization': `token ${config.TOKEN}`
+    // }
   };
 
-  request(options, fucntion(error, response, body) {
+  request(options, function(error, response, body) {
     if (error) {
     	console.log(error);
     } else {
@@ -24,3 +25,16 @@ function getSearchResults(searchTerm, callback) {
 }
 
 module.exports.getSearchResults = getSearchResults;
+
+// <script>
+//   (function() {
+//     var cx = '013073695205404143036:mfgwsplmimg';
+//     var gcse = document.createElement('script');
+//     gcse.type = 'text/javascript';
+//     gcse.async = true;
+//     gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+//     var s = document.getElementsByTagName('script')[0];
+//     s.parentNode.insertBefore(gcse, s);
+//   })();
+// </script>
+// <gcse:search></gcse:search>
