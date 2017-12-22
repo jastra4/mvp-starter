@@ -2,12 +2,14 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import List from './components/List.jsx';
+import Search from './components/Search.jsx';
 
 class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: []
+      items: [],
+      query: ''
     }
   }
 
@@ -27,7 +29,8 @@ class App extends React.Component {
 
   render () {
     return (<div>
-      <h1>Item</h1>
+      <h1>Search</h1>
+      <Search query={this.state.query}/>
       <List items={this.state.items}/>
     </div>)
   }
