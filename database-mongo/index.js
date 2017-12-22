@@ -12,8 +12,9 @@ db.once('open', function() {
 });
 
 var itemSchema = mongoose.Schema({
-  quantity: Number,
-  description: String
+  title: String,
+  snippet: String,
+  link: String
 });
 
 var Item = mongoose.model('Item', itemSchema);
@@ -28,4 +29,9 @@ var selectAll = function(callback) {
   });
 };
 
+var save = function(data) {
+  console.log('db received data: ', data);
+}
+
 module.exports.selectAll = selectAll;
+module.exports.save = save;

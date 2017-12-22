@@ -12,15 +12,17 @@ function getSearchResults(searchTerm, callback) {
     //   'Authorization': `token ${config.TOKEN}`
     // }
   };
-
-  request(options, function(error, response, body) {
-    if (error) {
-    	console.log(error);
-    } else {
-    	var results = JSON.parse(body)
-      callback(results);
-    }
-  });
+  // this works, but google API only gets 100 queries a day
+  // request(options, function(error, response, body) {
+  //   if (error) {
+  //   	console.log(error);
+  //   } else {
+  //   	var results = JSON.parse(body)
+  //     callback(results);
+  //   }
+  // });
+  var fakeData = {items: [{title:'puppies!' ,link: 'https://www.google.com',snippet:'look at some puppies' }]};
+  callback(fakeData)
 
 }
 
