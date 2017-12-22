@@ -12,6 +12,11 @@ db.once('open', function() {
 });
 
 var itemSchema = mongoose.Schema({
+  id: {
+    type: String,
+    unique: true,
+    required: true
+  },
   title: String,
   snippet: String,
   link: String
@@ -29,8 +34,23 @@ var selectAll = function(callback) {
   });
 };
 
-var save = function(data) {
-  console.log('db received data: ', data);
+var save = function(results) {
+  console.log('db received results: ', results);
+  results.forEach(function(result) {
+    var res = new Item({
+      id: result.cacheId,
+      title: result.title,
+      snippet: result.snippet,
+      link: result.link
+    })
+    res.save(function(error, res) {
+      if (error) {
+        console.log('DB ERROR: ', error);
+      } else {
+        console.log('DB saved successfully!');
+      }
+    })
+  });
 }
 
 module.exports.selectAll = selectAll;

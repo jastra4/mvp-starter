@@ -21,7 +21,7 @@ function getSearchResults(searchTerm, callback) {
   //     callback(results);
   //   }
   // });
-  var fakeData = {items: [{title:'puppies!' ,link: 'https://www.google.com',snippet:'look at some puppies' }]};
+  var fakeData = {items: [{title:'puppies!' ,link: 'https://www.google.com',snippet:'look at some puppies', cacheId:'asdf' }]};
   callback(fakeData)
 
 }

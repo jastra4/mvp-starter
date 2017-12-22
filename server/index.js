@@ -14,7 +14,7 @@ app.post('/items', function(req, res) {
   console.log('server received request from client: ', req.body);
   queryAPI.getSearchResults(req.body, function(results) {
   	console.log('server received results from service: ', results.items.length, results.items[0]);
-    db.save(results);
+    db.save(results.items);
     res.sendStatus(201);
   });
 });
