@@ -10,8 +10,9 @@ app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser());
 
 app.post('/items', function(req, res) {
-  console.log('server received request: ', req.body);
+  console.log('server received request from client: ', req.body);
   queryAPI.getSearchResults(req.body, function(results) {
+  	console.log('server received results from service: ', results);
   //   db.save(results);
     res.sendStatus(201);
   });
