@@ -20,7 +20,7 @@ app.post('/items', function(req, res) {
 
 app.get('/google', function (req, res) {
   db.selectAllGoogle(function(err, data) {
-    console.log('DATA: ', data);
+    //console.log('DATA: ', data);
     if(err) {
       res.sendStatus(500);
     } else {

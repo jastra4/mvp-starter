@@ -57,7 +57,6 @@ var selectAllGoogle = function(callback) {
 
 var selectAllYahoo = function(callback) {
   Yahoo.find({}, function(err, results) {
-    console.log('yahoo results: ', results);
     if(err) {
       callback(err, null);
     } else {
@@ -83,9 +82,12 @@ var save = function(results) {
   });
 
   results.forEach(function(result) {
+    console.log('RESULTS: ', result)
     var source = result.items.splice(0, 1);
+    console.log('SOURCE: ', source);
     result.items.forEach(function(result) {
-      if (source === 'Google') {
+      if (source[0] === 'Google') { ///
+        console.log('GOOGLE: ', result);
         var res = new Google({
           id: result.cacheId,
           title: result.title,
@@ -93,6 +95,7 @@ var save = function(results) {
           link: result.link
         })
       } else {
+        console.log('YAHOO: ', result);
         var res = new Yahoo({
           id: result.cacheId,
           title: result.title,
