@@ -7,12 +7,14 @@ class SearchList extends React.Component {
 		this.state = {};
 	}
 
+
+
 	render() {
 		return (
-			<div>
+			<div className="history">
 				<h4> Search History </h4>
 				<button onClick={this.props.clear}> Clear Search </button>
-				{this.props.items.map((item, i) => <SearchListItem key={i} item={item}/>)}
+				{this.props.items.map((item, i) => <SearchListItem key={i} item={item} search={this.props.search}/>)}
 			</div>
 		)
 	}

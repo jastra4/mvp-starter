@@ -16,30 +16,14 @@ class Search extends React.Component {
 		})
 	}
 
-	search() {
-    console.log(this.state.term)
-    $.ajax({
-    	url: '/items',
-    	type: 'POST',
-    	data: {term: this.state.term}
-    })
-    .done(() => {
-      console.log('ajax post sucess');
-      // call get
-    })
-    .fail(() => {
-    	console.log('ajax post failed');
-    });
-	}
-
 	render() {
 		return (
-			<div>
+			<div className="search">
 			  Enter search here: <input value={this.state.term} onChange={this.onChange.bind(this)} />	
 
 
 
-			  <button onClick={this.search.bind(this)}>Search</button>
+			  <button onClick={this.props.search}>Search</button>
 			</div>		
 		)
 	}

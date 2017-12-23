@@ -18,17 +18,11 @@ class App extends React.Component {
   }
 
   clearHistory() {
-    // need to clear db instead of just state
     $.ajax({
       url: '/clear', 
       type: 'GET',
       success: (data) => {
-        // var googleData = data[0];
-        // var yahooData = data[1];
-        //var searchData = data;
         this.setState({
-          // googleItems: googleData,
-          // yahooItems: yahooData,
           searchItems: []
         })
       },
@@ -36,26 +30,40 @@ class App extends React.Component {
         console.log('err', err);
       }
     });
-
   }
 
   refresh() {
     $.ajax({
-      url: '/items', 
       type: 'GET',
-      success: (data) => {
-        var googleData = data[0];
-        var yahooData = data[1];
-        var searchData = data[2];
-        this.setState({
-          googleItems: googleData,
-          yahooItems: yahooData,
-          searchItems: searchData
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
+      url: '/items'
+    })
+    .done((data) => { 
+      var googleData = data[0];
+      var yahooData = data[1];
+      var searchData = data[2];
+      this.setState({
+        googleItems: googleData,
+        yahooItems: yahooData,
+        searchItems: searchData
+      })      
+    })
+    .fail(function() {
+      console.log( "error" );
+    });
+  }
+
+  search() {
+    $.ajax({
+      url: '/items',
+      type: 'POST',
+      data: {term: this.state.term}
+    })
+    .done(() => {
+      console.log('ajax post sucess');
+      this.refresh();
+    })
+    .fail(() => {
+      console.log('ajax post failed');
     });
   }
 
@@ -66,12 +74,31 @@ class App extends React.Component {
   render () {
     return (<div>
       <h1>Search</h1>
-      <Search query={this.state.query} refresh={this.refresh.bind(this)}/>
+      <Search query={this.state.query} refresh={this.refresh.bind(this)} search={this.search.bind(this)}/>
       <YahooList items={this.state.yahooItems}/>
       <GoogleList items={this.state.googleItems}/>
-      <SearchList items={this.state.searchItems} clear={this.clearHistory.bind(this)}/>
+      <SearchList items={this.state.searchItems} clear={this.clearHistory.bind(this)} search={this.search.bind(this)}/>
     </div>)
   }
 }
 
 ReactDOM.render(<App />, document.getElementById('app'));
+
+
+    // $.ajax({
+    //   url: '/items', 
+    //   type: 'GET',
+    //   success: (data) => {
+    //     var googleData = data[0];
+    //     var yahooData = data[1];
+    //     var searchData = data[2];
+    //     this.setState({
+    //       googleItems: googleData,
+    //       yahooItems: yahooData,
+    //       searchItems: searchData
+    //     })
+    //   },
+    //   error: (err) => {
+    //     console.log('err', err);
+    //   }
+    // });

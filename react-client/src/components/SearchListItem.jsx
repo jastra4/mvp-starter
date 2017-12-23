@@ -1,7 +1,7 @@
 import React from 'react';
 
 const SearchListItem = (props) => (
-  <div>
+  <div className="history" onClick={props.search}>
   	{props.item.term}
   </div>
 )
