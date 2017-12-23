@@ -11,7 +11,7 @@ db.once('open', function() {
   console.log('mongoose connected successfully');
 });
 
-var itemSchema = mongoose.Schema({
+var googleSchema = mongoose.Schema({
   id: {
     type: String,
     unique: true,
@@ -21,24 +21,40 @@ var itemSchema = mongoose.Schema({
   snippet: String,
   link: String
 });
+var Google = mongoose.model('Google', googleSchema);
 
-var Item = mongoose.model('Item', itemSchema);
+var searchHistorySchema = mongoose.Schema({
+  id: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  term: String
+});
+var Search = mongoose.model('Search', searchHistorySchema);
 
 var selectAll = function(callback) {
-  Item.find({}, function(err, items) {
+  Google.find({}, function(err, results) {
     if(err) {
       callback(err, null);
     } else {
-      callback(null, items);
+      callback(null, results);
     }
   });
 };
 
 var save = function(results) {
+  db.collection('googles').drop(function(err, db) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('collection deleted');
+    }
+  });
   results.forEach(function(result) {
     result.items.forEach(function(result) {
       console.log('result: ', result);      
-      var res = new Item({
+      var res = new Google({
         id: result.cacheId,
         title: result.title,
         snippet: result.snippet,
