@@ -61,9 +61,26 @@ var selectAllYahoo = function(callback) {
   });
 };
 
+var selectAllHistory = function(callback) {
+  Search.find(function(err, results) {
+    if (err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
 var saveHistory = function(term) {
   var hist = new Search({
     term: term
+  })
+  hist.save(function(err, hist) {
+    if(err) {
+      console.log('search history save error: ',err);
+    } else {
+      console.log('Search history saved.');
+    }
   })
 }
 
@@ -115,5 +132,6 @@ var save = function(results) {
 
 module.exports.selectAllGoogle = selectAllGoogle;
 module.exports.selectAllYahoo = selectAllYahoo;
+module.exports.selectAllHistory = selectAllHistory;
 module.exports.save = save;
 module.exports.saveHistory = saveHistory;

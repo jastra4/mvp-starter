@@ -17,7 +17,7 @@ app.post('/items', function(req, res) {
     db.save(results);
     res.sendStatus(201);
   });
-  db.saveHistory(req.body);
+  db.saveHistory(req.body.term);
 });
 
 app.get('/items', function (req, res) {
@@ -29,7 +29,10 @@ app.get('/items', function (req, res) {
       results.push(data)
       db.selectAllYahoo(function(err, data) {
         results.push(data);
-        res.json(results);
+        db.selectAllHistory(function(err, data) {
+          results.push(data);
+          res.json(results);
+        })
       });
     }
   });

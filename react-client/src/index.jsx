@@ -22,13 +22,13 @@ class App extends React.Component {
       url: '/items', 
       type: 'GET',
       success: (data) => {
-        // [{googleData}, {yahooData}]
         var googleData = data[0];
         var yahooData = data[1];
-        console.log(googleData);
+        var searchData = data[2];
         this.setState({
           googleItems: googleData,
-          yahooItems: yahooData
+          yahooItems: yahooData,
+          searchItems: searchData
         })
       },
       error: (err) => {
