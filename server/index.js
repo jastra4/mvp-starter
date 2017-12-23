@@ -33,6 +33,11 @@ app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
 
-// results.items[0].title
-// results.items[0].link
-// results.items[0].snippet
+// save search term to db
+// display db info on clickable list
+// send post request to APIs on click
+
+// set up yahoo api
+// make display update automatically
+// limit results
+// order results
