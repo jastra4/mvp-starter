@@ -19,11 +19,12 @@ app.post('/items', function(req, res) {
   });
 });
 
-app.get('/google', function (req, res) {
+app.get('/items', function (req, res) {
   db.selectAllGoogle(function(err, data) {
     if(err) {
       res.sendStatus(500);
     } else {
+      console.log('GOOGLE DATA: ', data);
       res.json(data);
     }
   });
@@ -34,6 +35,7 @@ app.get('/yahoo', function (req, res) {
     if(err) {
       res.sendStatus(500);
     } else {
+      console.log('YAHOO DATA: ', data);
       res.json(data);
     }
   });

@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+import GoogleList from './components/GoogleList.jsx';
 import YahooList from './components/YahooList.jsx';
 import Search from './components/Search.jsx';
 
@@ -16,12 +17,16 @@ class App extends React.Component {
 
   componentDidMount() {
     $.ajax({
-      url: '/yahoo', 
+      url: '/items', 
       type: 'GET',
       success: (data) => {
-        //get all items and parse here
+        // [{googleData}, {yahooData}]
+        var googleData = data[0];
+        var yahooData = data[1];
+        console.log(googleData);
         this.setState({
-          yahooItems: data
+          //googleItems: googleData
+          //yahooItems: yahooData
         })
       },
       error: (err) => {
@@ -35,6 +40,7 @@ class App extends React.Component {
       <h1>Search</h1>
       <Search query={this.state.query}/>
       <YahooList items={this.state.yahooItems}/>
+      <GoogleList items={this.state.googleItems}/>
     </div>)
   }
 }
