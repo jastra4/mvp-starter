@@ -27,9 +27,10 @@ function getSearchResults(searchTerm, callback) {
 }
 
 module.exports.getSearchResults = getSearchResults;
-
+// Google code
 // <script>
 //   (function() {
+                
 //     var cx = '013073695205404143036:mfgwsplmimg';
 //     var gcse = document.createElement('script');
 //     gcse.type = 'text/javascript';
@@ -40,3 +41,18 @@ module.exports.getSearchResults = getSearchResults;
 //   })();
 // </script>
 // <gcse:search></gcse:search>
+
+// Yahoo code
+// <script>
+  // (function() {
+  //   var cx = '013073695205404143036:t8etssjvgr8';
+  //   var gcse = document.createElement('script');
+  //   gcse.type = 'text/javascript';
+  //   gcse.async = true;
+  //   gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
+  //   var s = document.getElementsByTagName('script')[0];
+//     s.parentNode.insertBefore(gcse, s);
+//   })();
+// </script>
+// <gcse:search></gcse:search>
+
