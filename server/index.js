@@ -24,8 +24,12 @@ app.get('/items', function (req, res) {
     if(err) {
       res.sendStatus(500);
     } else {
-      console.log('GOOGLE DATA: ', data);
-      res.json(data);
+      var results = [];
+      results.push(data)
+      db.selectAllYahoo(function(err, data) {
+        results.push(data);
+        res.json(results);
+      });
     }
   });
 });

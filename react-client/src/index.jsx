@@ -25,8 +25,8 @@ class App extends React.Component {
         var yahooData = data[1];
         console.log(googleData);
         this.setState({
-          //googleItems: googleData
-          //yahooItems: yahooData
+          googleItems: googleData,
+          yahooItems: yahooData
         })
       },
       error: (err) => {
