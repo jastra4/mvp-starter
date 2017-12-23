@@ -20,6 +20,12 @@ app.post('/items', function(req, res) {
   db.saveHistory(req.body.term);
 });
 
+app.get('/clear', function(req, res) {
+  db.clearHistory(function() {
+    res.sendStatus(200);
+  })
+});
+
 app.get('/items', function (req, res) {
   db.selectAllGoogle(function(err, data) {
     if(err) {

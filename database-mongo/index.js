@@ -89,6 +89,17 @@ var saveHistory = function(term) {
   })
 }
 
+var clearHistory = function(callback) {
+    db.collection('searches').drop(function(err, db) {
+    if (err) {
+      console.log('clear error: ', err);
+    } else {
+      callback();
+      console.log('Searches collection deleted');
+    }
+  });
+}
+
 var save = function(results) {
   db.collection('googles').drop(function(err, db) {
     if (err) {
@@ -138,5 +149,6 @@ var save = function(results) {
 module.exports.selectAllGoogle = selectAllGoogle;
 module.exports.selectAllYahoo = selectAllYahoo;
 module.exports.selectAllHistory = selectAllHistory;
+module.exports.clearHistory = clearHistory;
 module.exports.save = save;
 module.exports.saveHistory = saveHistory;

@@ -18,9 +18,25 @@ class App extends React.Component {
   }
 
   clearHistory() {
-    this.setState({
-      searchItems: []
-    })
+    // need to clear db instead of just state
+    $.ajax({
+      url: '/clear', 
+      type: 'GET',
+      success: (data) => {
+        // var googleData = data[0];
+        // var yahooData = data[1];
+        //var searchData = data;
+        this.setState({
+          // googleItems: googleData,
+          // yahooItems: yahooData,
+          searchItems: []
+        })
+      },
+      error: (err) => {
+        console.log('err', err);
+      }
+    });
+
   }
 
   refresh() {
