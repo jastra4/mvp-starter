@@ -35,24 +35,24 @@ var selectAll = function(callback) {
 };
 
 var save = function(results) {
-  // data will look different - refactor
-  // added each results group to an array
-  console.log('db received results: ', results);
   results.forEach(function(result) {
-    var res = new Item({
-      id: result.cacheId,
-      title: result.title,
-      snippet: result.snippet,
-      link: result.link
-    })
-    res.save(function(error, res) {
-      if (error) {
-        console.log('DB ERROR: ', error);
-      } else {
-        console.log('DB saved successfully!');
-      }
-    })
-  });
+    result.items.forEach(function(result) {
+      console.log('result: ', result);      
+      var res = new Item({
+        id: result.cacheId,
+        title: result.title,
+        snippet: result.snippet,
+        link: result.link
+      })
+      res.save(function(error, res) {
+        if (error) {
+          console.log('DB failed to save', error);
+        } else {
+          console.log('DB saved successfully!');
+        }
+      })
+    });
+  });  
 }
 
 module.exports.selectAll = selectAll;

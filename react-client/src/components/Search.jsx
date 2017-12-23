@@ -35,6 +35,9 @@ class Search extends React.Component {
 		return (
 			<div>
 			  Enter search here: <input value={this.state.term} onChange={this.onChange.bind(this)} />	
+
+
+
 			  <button onClick={this.search.bind(this)}>Search</button>
 			</div>		
 		)
