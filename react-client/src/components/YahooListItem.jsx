@@ -1,6 +1,6 @@
 import React from 'react';
 
-const ListItem = (props) => (
+const YahooListItem = (props) => (
   <div> 
 		<div> { props.item.id }</div>
 		<div> { props.item.title }</div>
@@ -9,4 +9,4 @@ const ListItem = (props) => (
   </div>
 )
 
-export default ListItem;
+export default YahooListItem;

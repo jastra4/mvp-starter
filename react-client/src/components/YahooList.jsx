@@ -1,11 +1,11 @@
 import React from 'react';
-import ListItem from './ListItem.jsx';
+import YahooListItem from './YahooListItem.jsx';
 
 const YahooList = (props) => (
   <div>
-    <h4 className="google"> Google Results </h4>
-    There are { props.items.length } items.
-    { props.items.map(item => <ListItem key={item.id} item={item}/>)}
+    <h4 className="yahoo"> Yahoo Results </h4>
+    There are { props.items.length } results.
+    { props.items.map(item => <YahooListItem key={item.id} item={item}/>)}
   </div>
 )
 
