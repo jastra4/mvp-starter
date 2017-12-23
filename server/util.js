@@ -41,7 +41,9 @@ function getSearchResults(searchTerm, callback) {
 
   // Test
   var fakeGoogleData = {items: [{title:'puppies!' ,link: 'https://www.google.com',snippet:'look at some puppies', cacheId:'asdf' }]};
+  fakeGoogleData.items.unshift('Google');
   var fakeYahooData = {items: [{title:'cats!' ,link: 'https://www.yahoo.com',snippet:'look at some CATS', cacheId:'hjkl' }]};
+  fakeYahooData.items.unshift('Yahoo');
   reply.push(fakeGoogleData);
   reply.push(fakeYahooData)
   callback(reply)

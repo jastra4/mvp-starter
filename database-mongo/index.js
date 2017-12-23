@@ -72,9 +72,9 @@ var save = function(results) {
   });
 
   results.forEach(function(result) {
+    var source = result.items.splice(0, 1);
     result.items.forEach(function(result) {
-      console.log('result: ', result);    
-      if (result.link === 'https://www.google.com') {
+      if (source === 'Google') {
         var res = new Google({
           id: result.cacheId,
           title: result.title,
