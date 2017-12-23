@@ -3,6 +3,7 @@ import ReactDOM from 'react-dom';
 import $ from 'jquery';
 import GoogleList from './components/GoogleList.jsx';
 import YahooList from './components/YahooList.jsx';
+import SearchList from './components/SearchList.jsx';
 import Search from './components/Search.jsx';
 
 class App extends React.Component {
@@ -11,6 +12,7 @@ class App extends React.Component {
     this.state = { 
       yahooItems: [],
       googleItems: [],
+      searchItems: [],
       query: ''
     }
   }
@@ -41,6 +43,7 @@ class App extends React.Component {
       <Search query={this.state.query}/>
       <YahooList items={this.state.yahooItems}/>
       <GoogleList items={this.state.googleItems}/>
+      <SearchList items={this.state.searchItems}/>
     </div>)
   }
 }
