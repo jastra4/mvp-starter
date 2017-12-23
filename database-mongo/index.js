@@ -36,11 +36,7 @@ var yahooSchema = mongoose.Schema({
 var Yahoo = mongoose.model('Yahoo', yahooSchema);
 
 var searchHistorySchema = mongoose.Schema({
-  id: {
-    type: String,
-    unique: true,
-    required: true
-  },
+  id: String,
   term: String
 });
 var Search = mongoose.model('Search', searchHistorySchema);
@@ -64,6 +60,12 @@ var selectAllYahoo = function(callback) {
     }
   });
 };
+
+var saveHistory = function(term) {
+  var hist = new Search({
+    term: term
+  })
+}
 
 var save = function(results) {
   db.collection('googles').drop(function(err, db) {
@@ -114,3 +116,4 @@ var save = function(results) {
 module.exports.selectAllGoogle = selectAllGoogle;
 module.exports.selectAllYahoo = selectAllYahoo;
 module.exports.save = save;
+module.exports.saveHistory = saveHistory;

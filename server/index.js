@@ -17,6 +17,7 @@ app.post('/items', function(req, res) {
     db.save(results);
     res.sendStatus(201);
   });
+  db.saveHistory(req.body);
 });
 
 app.get('/items', function (req, res) {
