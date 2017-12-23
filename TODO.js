@@ -1,9 +1,6 @@
-// limit search results (use num parameter)
-// refactor db save method
-// make display update automatically
-// save and display search history
-// make search history interactive
-// reformat page layout
-// add css
-
-// change post to get
+// re-render automatically
+// format in columns
+// make clear history button
+// make history clickable
+// use live data
+// limit max results

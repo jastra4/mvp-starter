@@ -25,6 +25,7 @@ class Search extends React.Component {
     })
     .done(() => {
       console.log('ajax post sucess');
+      // call get
     })
     .fail(() => {
     	console.log('ajax post failed');

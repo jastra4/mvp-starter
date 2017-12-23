@@ -17,7 +17,13 @@ class App extends React.Component {
     }
   }
 
-  componentDidMount() {
+  clearHistory() {
+    this.setState({
+      searchItems: []
+    })
+  }
+
+  refresh() {
     $.ajax({
       url: '/items', 
       type: 'GET',
@@ -37,13 +43,17 @@ class App extends React.Component {
     });
   }
 
+  componentDidMount() {
+    this.refresh();
+  }
+
   render () {
     return (<div>
       <h1>Search</h1>
-      <Search query={this.state.query}/>
+      <Search query={this.state.query} refresh={this.refresh.bind(this)}/>
       <YahooList items={this.state.yahooItems}/>
       <GoogleList items={this.state.googleItems}/>
-      <SearchList items={this.state.searchItems}/>
+      <SearchList items={this.state.searchItems} clear={this.clearHistory.bind(this)}/>
     </div>)
   }
 }

@@ -36,7 +36,11 @@ var yahooSchema = mongoose.Schema({
 var Yahoo = mongoose.model('Yahoo', yahooSchema);
 
 var searchHistorySchema = mongoose.Schema({
-  id: String,
+  id: {
+    type: String,
+    unique: false,
+    required: false
+  },
   term: String
 });
 var Search = mongoose.model('Search', searchHistorySchema);
@@ -73,6 +77,7 @@ var selectAllHistory = function(callback) {
 
 var saveHistory = function(term) {
   var hist = new Search({
+    id: term,
     term: term
   })
   hist.save(function(err, hist) {
