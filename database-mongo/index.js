@@ -23,6 +23,18 @@ var googleSchema = mongoose.Schema({
 });
 var Google = mongoose.model('Google', googleSchema);
 
+var yahooSchema = mongoose.Schema({
+  id: {
+    type: String,
+    unique: true,
+    required: true
+  },
+  title: String,
+  snippet: String,
+  link: String
+});
+var Yahoo = mongoose.model('Yahoo', yahooSchema);
+
 var searchHistorySchema = mongoose.Schema({
   id: {
     type: String,
@@ -48,18 +60,36 @@ var save = function(results) {
     if (err) {
       console.log(err);
     } else {
-      console.log('collection deleted');
+      console.log('Google collection deleted');
     }
   });
+  db.collection('yahoos').drop(function(err, db) {
+    if (err) {
+      console.log(err);
+    } else {
+      console.log('Yahoo collection deleted');
+    }
+  });
+
   results.forEach(function(result) {
     result.items.forEach(function(result) {
-      console.log('result: ', result);      
-      var res = new Google({
-        id: result.cacheId,
-        title: result.title,
-        snippet: result.snippet,
-        link: result.link
-      })
+      console.log('result: ', result);    
+      if (result.link === 'https://www.google.com') {
+        var res = new Google({
+          id: result.cacheId,
+          title: result.title,
+          snippet: result.snippet,
+          link: result.link
+        })
+      } else {
+        var res = new Yahoo({
+          id: result.cacheId,
+          title: result.title,
+          snippet: result.snippet,
+          link: result.link
+        })        
+      } 
+
       res.save(function(error, res) {
         if (error) {
           console.log('DB failed to save', error);
