@@ -35,6 +35,8 @@ var selectAll = function(callback) {
 };
 
 var save = function(results) {
+  // data will look different - refactor
+  // added each results group to an array
   console.log('db received results: ', results);
   results.forEach(function(result) {
     var res = new Item({

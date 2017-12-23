@@ -12,9 +12,15 @@ app.use(bodyParser());
 
 app.post('/items', function(req, res) {
   console.log('server received request from client: ', req.body);
-  queryAPI.getSearchResults(req.body, function(results) {
-  	console.log('server received results from service: ', results.items.length, results.items[0]);
-    db.save(results.items);
+  
+  queryAPI.getSearchResults(req.body, function(googleResults, yahooResults) {
+  	//console.log('server received results from service: ', results.items.length, results.items[0]);
+    //var results = [];
+    //results.push(googleResults);
+    //results.push(yahooResults);
+    console.log('server response ran');
+    //db.save(results[0]);
+    //db.save(results[1]);
     res.sendStatus(201);
   });
 });
