@@ -45,8 +45,19 @@ var searchHistorySchema = mongoose.Schema({
 });
 var Search = mongoose.model('Search', searchHistorySchema);
 
-var selectAll = function(callback) {
+var selectAllGoogle = function(callback) {
   Google.find({}, function(err, results) {
+    if(err) {
+      callback(err, null);
+    } else {
+      callback(null, results);
+    }
+  });
+};
+
+var selectAllYahoo = function(callback) {
+  Yahoo.find({}, function(err, results) {
+    console.log('yahoo results: ', results);
     if(err) {
       callback(err, null);
     } else {
@@ -101,5 +112,6 @@ var save = function(results) {
   });  
 }
 
-module.exports.selectAll = selectAll;
+module.exports.selectAllGoogle = selectAllGoogle;
+module.exports.selectAllYahoo = selectAllYahoo;
 module.exports.save = save;

@@ -15,7 +15,7 @@ class App extends React.Component {
 
   componentDidMount() {
     $.ajax({
-      url: '/items', 
+      url: '/yahoo', 
       type: 'GET',
       success: (data) => {
         console.log(data);

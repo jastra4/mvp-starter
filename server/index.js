@@ -3,7 +3,8 @@ const db = require('../database-mongo/index.js');
 var express = require('express');
 var bodyParser = require('body-parser');
 
-var items = require('../database-mongo');
+//var items = require('../database-mongo');
+var yahoos = require('../database-mongo');
 
 var app = express();
 
@@ -17,8 +18,19 @@ app.post('/items', function(req, res) {
   });
 });
 
-app.get('/items', function (req, res) {
-  items.selectAll(function(err, data) {
+app.get('/google', function (req, res) {
+  db.selectAllGoogle(function(err, data) {
+    console.log('DATA: ', data);
+    if(err) {
+      res.sendStatus(500);
+    } else {
+      res.json(data);
+    }
+  });
+});
+
+app.get('/yahoo', function (req, res) {
+  yahoos.selectAllYahoo(function(err, data) {
     if(err) {
       res.sendStatus(500);
     } else {
