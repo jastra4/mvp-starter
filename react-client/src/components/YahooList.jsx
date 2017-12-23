@@ -1,7 +1,7 @@
 import React from 'react';
 import ListItem from './ListItem.jsx';
 
-const List = (props) => (
+const YahooList = (props) => (
   <div>
     <h4 className="google"> Google Results </h4>
     There are { props.items.length } items.
@@ -9,4 +9,4 @@ const List = (props) => (
   </div>
 )
 
-export default List;
+export default YahooList;

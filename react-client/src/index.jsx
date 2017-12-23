@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
-import List from './components/List.jsx';
+import YahooList from './components/YahooList.jsx';
 import Search from './components/Search.jsx';
 
 class App extends React.Component {
@@ -34,7 +34,7 @@ class App extends React.Component {
     return (<div>
       <h1>Search</h1>
       <Search query={this.state.query}/>
-      <List items={this.state.yahooItems}/>
+      <YahooList items={this.state.yahooItems}/>
     </div>)
   }
 }
