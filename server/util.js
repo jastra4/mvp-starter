@@ -5,14 +5,8 @@ function getSearchResults(searchTerm, callback) {
   console.log('request helper received: ', searchTerm.term);
   searchTerm = searchTerm.term;
 
-  // let options = {
-    // url: 'https://www.googleapis.com/customsearch/v1?key=' + config.token +'&cx=' + config.sid + '&q=' + searchTerm
-    // headers: {
-    //   'User-Agent': 'request',
-    //   'Authorization': `token ${config.TOKEN}`
-    // }
-  // };
-  //this works, but google API only gets 100 queries a day
+  // Google
+  // let options = {url: 'https://www.googleapis.com/customsearch/v1?key=' + config.token +'&cx=' + config.sid + '&q=' + searchTerm}
   // request(options, function(error, response, body) {
   //   if (error) {
   //   	console.log(error);
@@ -31,38 +25,11 @@ function getSearchResults(searchTerm, callback) {
   //     callback(results);
   //   }
   // });
+  // Test
   var fakeData = {items: [{title:'puppies!' ,link: 'https://www.google.com',snippet:'look at some puppies', cacheId:'asdf' }]};
   callback(fakeData)
 
 }
 
 module.exports.getSearchResults = getSearchResults;
-// Google code
-// <script>
-//   (function() {
-
-//     var cx = '013073695205404143036:mfgwsplmimg';
-//     var gcse = document.createElement('script');
-//     gcse.type = 'text/javascript';
-//     gcse.async = true;
-//     gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-//     var s = document.getElementsByTagName('script')[0];
-//     s.parentNode.insertBefore(gcse, s);
-//   })();
-// </script>
-// <gcse:search></gcse:search>
-
-// Yahoo code
-// <script>
-  // (function() {
-  //   var cx = '013073695205404143036:t8etssjvgr8';
-  //   var gcse = document.createElement('script');
-  //   gcse.type = 'text/javascript';
-  //   gcse.async = true;
-  //   gcse.src = 'https://cse.google.com/cse.js?cx=' + cx;
-  //   var s = document.getElementsByTagName('script')[0];
-//     s.parentNode.insertBefore(gcse, s);
-//   })();
-// </script>
-// <gcse:search></gcse:search>
 
