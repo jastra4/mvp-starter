@@ -8,7 +8,8 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      items: [],
+      yahooItems: [],
+      googleItems: [],
       query: ''
     }
   }
@@ -18,9 +19,9 @@ class App extends React.Component {
       url: '/yahoo', 
       type: 'GET',
       success: (data) => {
-        console.log(data);
+        //get all items and parse here
         this.setState({
-          items: data
+          yahooItems: data
         })
       },
       error: (err) => {
@@ -33,7 +34,7 @@ class App extends React.Component {
     return (<div>
       <h1>Search</h1>
       <Search query={this.state.query}/>
-      <List items={this.state.items}/>
+      <List items={this.state.yahooItems}/>
     </div>)
   }
 }

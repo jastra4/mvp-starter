@@ -5,6 +5,7 @@ var bodyParser = require('body-parser');
 
 //var items = require('../database-mongo');
 var yahoos = require('../database-mongo');
+var googles = require('../database-mongo');
 
 var app = express();
 
@@ -20,7 +21,6 @@ app.post('/items', function(req, res) {
 
 app.get('/google', function (req, res) {
   db.selectAllGoogle(function(err, data) {
-    //console.log('DATA: ', data);
     if(err) {
       res.sendStatus(500);
     } else {
