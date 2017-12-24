@@ -2,10 +2,10 @@ import React from 'react';
 
 const GoogleListItem = (props) => (
   <div> 
-		<div className="google"> { props.item.id }</div>
-		<div> { props.item.title }</div>
-		<a href={ props.item.link }> { props.item.link } </a>
-		<div> { props.item.snippet }</div>
+		<div className="google">{props.result.id}</div>
+		<div>{props.result.title}</div>
+		<a href={props.result.link }>{props.result.link}</a>
+		<div>{props.result.snippet}</div>
   </div>
 )
 

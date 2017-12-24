@@ -1,6 +1,8 @@
 const queryAPI = require('./util.js');
 const db = require('../database-mongo/index.js');
-var express = require('express');
+//var express = require('express');
+var Promise = require('bluebird');
+var express = Promise.promisifyAll(require('express'));
 var bodyParser = require('body-parser');
 
 //var items = require('../database-mongo');
@@ -12,13 +14,19 @@ var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser());
 
-app.post('/items', function(req, res) {  
-  queryAPI.getSearchResults(req.body, function(results) {
-    db.save(results);
-    res.sendStatus(201);
+app.post('/query', function(req, res) {  
+  queryAPI.getSearchResults(req.body, function(googleResults, yahooResults) {
+    //console.log('googleResults: ',JSON.parse(googleResults));
+    db.saveGoogle(JSON.parse(googleResults), function() {
+      //db.saveYahoo(JSON.parse(yahooResults), function() {
+        //db.saveHistory(req.body.term, function() {
+          res.sendStatus(201);
+        //});
+      //});
+    });
   });
-  db.saveHistory(req.body.term);
 });
+  //console.log('***RESULTS*** ', JSON.parse(results[0]));
 
 app.get('/clear', function(req, res) {
   db.clearHistory(function() {
@@ -26,7 +34,9 @@ app.get('/clear', function(req, res) {
   })
 });
 
-app.get('/items', function (req, res) {
+//app.get('/update', function(resolve, reject) {}).then(console.log('router worked'));
+
+app.get('/update', function (req, res) {
   db.selectAllGoogle(function(err, data) {
     if(err) {
       res.sendStatus(500);

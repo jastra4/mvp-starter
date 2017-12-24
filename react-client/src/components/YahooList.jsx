@@ -4,8 +4,8 @@ import YahooListItem from './YahooListItem.jsx';
 const YahooList = (props) => (
   <div>
     <h4 className="yahoo"> Yahoo Results </h4>
-    There are { props.items.length } results.
-    { props.items.map(item => <YahooListItem key={item.id} item={item}/>)}
+    There are {props.results.length} results.
+    {props.results.map(result => <YahooListItem key={result.id} result={result}/>)}
   </div>
 )
 

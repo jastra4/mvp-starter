@@ -1,6 +1,7 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
+
 import GoogleList from './components/GoogleList.jsx';
 import YahooList from './components/YahooList.jsx';
 import SearchList from './components/SearchList.jsx';
@@ -10,74 +11,86 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = { 
-      yahooItems: [],
-      googleItems: [],
-      searchItems: [],
-      query: ''
+      yahooResults: [],
+      googleResults: [],
+      searchHistory: [],
+      searchBar: ''
     }
+
+    this.onChange = this.onChange.bind(this);
+    this.search = this.search.bind(this);
+    this.clearHistory = this.clearHistory.bind(this);
+    this.refreshPage = this.refreshPage.bind(this);
   }
 
   clearHistory() {
     $.ajax({
       url: '/clear', 
-      type: 'GET',
-      success: (data) => {
-        this.setState({
-          searchItems: []
-        })
-      },
-      error: (err) => {
-        console.log('err', err);
-      }
-    });
+      type: 'GET'
+    })
+    .done((result) => {
+      this.setState({
+        searchHistory: []
+      });
+    })
+    .catch((err) => {
+      console.log('clearHistory error: ', err);
+    })
   }
 
-  refresh() {
+  refreshPage() {
     $.ajax({
       type: 'GET',
-      url: '/items'
+      url: '/update'
     })
     .done((data) => { 
+      console.log('get request complete');
       var googleData = data[0];
       var yahooData = data[1];
       var searchData = data[2];
       this.setState({
-        googleItems: googleData,
-        yahooItems: yahooData,
-        searchItems: searchData
+        googleResults: googleData,
+        yahooResults: yahooData,
+        searchHistory: searchData
       })      
     })
-    .fail(function() {
-      console.log( "error" );
+    .fail(function(err) {
+      console.log('refreshPage error: ', err);
     });
   }
 
   search() {
     $.ajax({
-      url: '/items',
+      url: '/query',
       type: 'POST',
-      data: {term: this.state.term}
+      data: {term: this.state.searchBar}
     })
-    .done(() => {
-      console.log('ajax post sucess');
-      this.refresh();
+    .done((result) => {
+      this.refreshPage();
+      console.log('post request complete');
     })
-    .fail(() => {
-      console.log('ajax post failed');
+    .fail((err) => {
+      console.log('search error: ', err);
     });
   }
 
+  onChange(e) {
+    this.setState({
+      searchBar: e.target.value
+    })
+  }
+
   componentDidMount() {
-    this.refresh();
+    this.refreshPage();
   }
 
   render () {
     return (<div>
       <h1>Search</h1>
-      <Search query={this.state.query} refresh={this.refresh.bind(this)} search={this.search.bind(this)}/>
-      <YahooList items={this.state.yahooItems}/>
-      <GoogleList items={this.state.googleItems}/>
-      <SearchList items={this.state.searchItems} clear={this.clearHistory.bind(this)} search={this.search.bind(this)}/>
+        <Search onChange={this.onChange} refresh={this.refreshPage} search={this.search}/>
+        <YahooList results={this.state.yahooResults}/>
+        <GoogleList results={this.state.googleResults}/>
+        <SearchList results={this.state.searchHistory} clear={this.clearHistory} search={this.search}/>
     </div>)
   }
 }
@@ -85,20 +98,3 @@ class App extends React.Component {
 ReactDOM.render(<App />, document.getElementById('app'));
 
 
-    // $.ajax({
-    //   url: '/items', 
-    //   type: 'GET',
-    //   success: (data) => {
-    //     var googleData = data[0];
-    //     var yahooData = data[1];
-    //     var searchData = data[2];
-    //     this.setState({
-    //       googleItems: googleData,
-    //       yahooItems: yahooData,
-    //       searchItems: searchData
-    //     })
-    //   },
-    //   error: (err) => {
-    //     console.log('err', err);
-    //   }
-    // });

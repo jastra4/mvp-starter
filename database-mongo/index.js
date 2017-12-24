@@ -14,8 +14,8 @@ db.once('open', function() {
 var googleSchema = mongoose.Schema({
   id: {
     type: String,
-    unique: true,
-    required: true
+    unique: false,
+    required: false
   },
   title: String,
   snippet: String,
@@ -26,8 +26,8 @@ var Google = mongoose.model('Google', googleSchema);
 var yahooSchema = mongoose.Schema({
   id: {
     type: String,
-    unique: true,
-    required: true
+    unique: false,
+    required: false
   },
   title: String,
   snippet: String,
@@ -75,20 +75,6 @@ var selectAllHistory = function(callback) {
   });
 };
 
-var saveHistory = function(term) {
-  var hist = new Search({
-    id: term,
-    term: term
-  })
-  hist.save(function(err, hist) {
-    if(err) {
-      console.log('search history save error: ',err);
-    } else {
-      console.log('Search history saved.');
-    }
-  })
-}
-
 var clearHistory = function(callback) {
     db.collection('searches').drop(function(err, db) {
     if (err) {
@@ -100,7 +86,8 @@ var clearHistory = function(callback) {
   });
 }
 
-var save = function(results) {
+var saveGoogle = function(results, callback) {
+  results = results.items;
   db.collection('googles').drop(function(err, db) {
     if (err) {
       console.log(err);
@@ -108,47 +95,56 @@ var save = function(results) {
       console.log('Google collection deleted');
     }
   });
-  db.collection('yahoos').drop(function(err, db) {
-    if (err) {
-      console.log(err);
-    } else {
-      console.log('Yahoo collection deleted');
-    }
-  });
-
   results.forEach(function(result) {
-    var source = result.items.splice(0, 1);
-    result.items.forEach(function(result) {
-      if (source[0] === 'Google') { ///
-        var res = new Google({
-          id: result.cacheId,
-          title: result.title,
-          snippet: result.snippet,
-          link: result.link
-        })
-      } else {
-        var res = new Yahoo({
-          id: result.cacheId,
-          title: result.title,
-          snippet: result.snippet,
-          link: result.link
-        })        
-      } 
-
-      res.save(function(error, res) {
-        if (error) {
-          console.log('DB failed to save', error);
-        } else {
-          console.log('DB saved successfully!');
-        }
-      })
-    });
-  });  
+    var res = new Google({
+      id: result.cacheId,
+      title: result.title,
+      snippet: result.snippet,
+      link: result.link
+    })  
+    res.save().then(function() {callback()})
+  });
 }
+
+// var saveYahoo = function(results, callback) {
+//   results = results.items;
+//   db.collection('yahoos').drop(function(err, db) {
+//     if (err) {
+//       console.log(err);
+//     } else {
+//       console.log('Yahoo collection deleted');
+//     }
+//   });
+//   results.forEach(function(result) {
+//     var res = new Yahoo({
+//       id: result.cacheId,
+//       title: result.title,
+//       snippet: result.snippet,
+//       link: result.link
+//     })    
+//     res.save().then(function() {callback()})
+//   });
+// }
+
+// var saveHistory = function(term, callback) {
+//   var hist = new Search({
+//     id: term,
+//     term: term
+//   })
+//   hist.save(function(err, hist) {
+//     if(err) {
+//       console.log('search history save error: ',err);
+//     } else {
+//       callback();
+//       console.log('Search history saved.');
+//     }
+//   })
+// }
 
 module.exports.selectAllGoogle = selectAllGoogle;
 module.exports.selectAllYahoo = selectAllYahoo;
 module.exports.selectAllHistory = selectAllHistory;
 module.exports.clearHistory = clearHistory;
-module.exports.save = save;
-module.exports.saveHistory = saveHistory;
+//module.exports.saveYahoo = saveYahoo;
+module.exports.saveGoogle = saveGoogle;
+//module.exports.saveHistory = saveHistory;
