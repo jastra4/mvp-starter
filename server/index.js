@@ -14,15 +14,15 @@ var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser());
 
-app.post('/query', function(req, res) {  
+app.post('/query', function(req, res) { // .saveGoogle gets called by every element in yahooResults
   queryAPI.getSearchResults(req.body, function(googleResults, yahooResults) {
     //console.log('googleResults: ',JSON.parse(googleResults));
-    db.saveGoogle(JSON.parse(googleResults), function() {
-      //db.saveYahoo(JSON.parse(yahooResults), function() {
-        //db.saveHistory(req.body.term, function() {
+    db.saveYahoo(JSON.parse(yahooResults), function() {
+      db.saveGoogle(JSON.parse(googleResults), function() {
+        db.saveHistory(req.body.term, function() {
           res.sendStatus(201);
-        //});
-      //});
+        });
+      });
     });
   });
 });
