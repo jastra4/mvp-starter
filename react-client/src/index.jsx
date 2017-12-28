@@ -84,6 +84,8 @@ class App extends React.Component {
     this.refreshPage();
   }
 
+  
+
   render () {
     return (<div className="main">
       <h1>Searchify</h1>

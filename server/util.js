@@ -6,7 +6,7 @@ function getSearchResults(searchTerm, callback) {
   searchTerm = searchTerm.term;
   const googleOptions = {url: 'https://www.googleapis.com/customsearch/v1?key=' + config.token +'&cx=' + config.sid + '&q=' + searchTerm + '&num=' + 3};
   const yahooOptions = {url: 'https://www.googleapis.com/customsearch/v1?key=' + config.token +'&cx=' + config.yho + '&q=' + searchTerm + '&num=' + 3};
-  // LIVE
+  // LIVE  ** bug: page auto refreshes before google data is available ** 
   // rp(googleOptions)
   // .then(function(results) {
   //   var googleResults = results;
