@@ -2,8 +2,8 @@ import React from 'react';
 import styles from 'styled-components';
 
 const Wrapper = styles.div`
-  margin-top: 10px;
-  margin-bottom: 10px;
+  margin-top: 20px;
+  margin-bottom: 20px;
 `;
 
 const Link = styles.a`
@@ -11,7 +11,6 @@ const Link = styles.a`
 `;
 
 const Title = styles.div`
-  font-weight: bold;
 `;
 
 const GoogleListItem = (props) => (
