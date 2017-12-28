@@ -14,7 +14,7 @@ var app = express();
 app.use(express.static(__dirname + '/../react-client/dist'));
 app.use(bodyParser());
 
-app.post('/query', function(req, res) { // .saveGoogle gets called by every element in yahooResults
+app.post('/query', function(req, res) {
   queryAPI.getSearchResults(req.body, function(googleResults, yahooResults) {
     //console.log('googleResults: ',JSON.parse(googleResults));
     db.saveYahoo(JSON.parse(yahooResults), function() {

@@ -1,4 +1,5 @@
 import React from 'react';
+import styles from 'styled-components';
 import ReactDOM from 'react-dom';
 import $ from 'jquery';
 
@@ -84,7 +85,12 @@ class App extends React.Component {
     this.refreshPage();
   }
 
-  
+  Wrapper() {
+    styles.div`
+      border:2px solid black;
+      width: 100%;
+    `;
+  }
 
   render () {
     return (<div className="main">

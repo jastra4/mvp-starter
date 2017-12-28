@@ -10,24 +10,12 @@ const Wrapper = styled.div`
   margin-right:1%;
 `;
 
-const Title = styled.h4`
-
-`;
-
 const YahooList = (props) => (
-  <Wrapper className="yahoo-list">
-  	<Title> Yahoo Results </Title>
+  <Wrapper>
+  	<h4> Yahoo Results </h4>
   	{props.results.map((result, i) => <YahooListItem className="yahoo" key={i} result={result}/>)}
   </Wrapper>
 )
-
-
-// const YahooList = (props) => (
-//   <div className="yahoo-list">
-//     <h4> Yahoo Results </h4>
-//     {props.results.map((result, i) => <YahooListItem className="yahoo" key={i} result={result}/>)}
-//   </div>
-// )
 
 export default YahooList;
 

@@ -8,4 +8,5 @@
 
 
 
-
+// search results take a second or two to display
+// google results are bleeding over right side

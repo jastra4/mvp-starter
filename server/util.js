@@ -4,8 +4,8 @@ var rp = require('request-promise');
 
 function getSearchResults(searchTerm, callback) {
   searchTerm = searchTerm.term;
-  const googleOptions = {url: 'https://www.googleapis.com/customsearch/v1?key=' + config.token +'&cx=' + config.sid + '&q=' + searchTerm + '&num=' + 3};
-  const yahooOptions = {url: 'https://www.googleapis.com/customsearch/v1?key=' + config.token +'&cx=' + config.yho + '&q=' + searchTerm + '&num=' + 3};
+  const googleOptions = {url: 'https://www.googleapis.com/customsearch/v1?key=' + config.token +'&cx=' + config.sid + '&q=' + searchTerm + '&num=' + 5};
+  const yahooOptions = {url: 'https://www.googleapis.com/customsearch/v1?key=' + config.token +'&cx=' + config.yho + '&q=' + searchTerm + '&num=' + 5};
   // LIVE  ** bug: page auto refreshes before google data is available ** 
   // rp(googleOptions)
   // .then(function(results) {
@@ -28,7 +28,7 @@ function getSearchResults(searchTerm, callback) {
       {
         title: 'dogs1',
         snippet: 'look at some dogs',
-        link: 'www.google.com/whatever'
+        link: 'www.google.com/whateverasdfsdfsdfsdfasdfsadfsafdsdf'
       }, 
       {
         title: 'dogs2',
@@ -48,7 +48,7 @@ function getSearchResults(searchTerm, callback) {
       {
         title: 'cats1',
         snippet: 'look at some cats',
-        link: 'www.yahoo.com/whatever'
+        link: 'www.yahoo.com/whateverasdfsdfsadfsadfsadfasdfsdafasdf'
       }, 
       {
         title: 'cats2',

@@ -1,9 +1,16 @@
 import React from 'react';
+import styles from 'styled-components';
+
+const Wrapper = styles.div`
+  margin-top: 5px;
+  margin-bottom: 5px;
+  word-break: break-all;
+`;
 
 const SearchListItem = (props) => (
-  <div className="search-list-item" onClick={props.search}>
+  <Wrapper onClick={props.search}>
   	{props.result.term}
-  </div>
+  </Wrapper>
 )
 
 export default SearchListItem;
