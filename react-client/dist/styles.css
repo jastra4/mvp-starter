@@ -1,19 +1,48 @@
-.google {
-/*  display: flex;
-  justify-content: flex-start;*/
+body {
+    background: #eee;
+    text-align: left;
+    padding: 0 25px;
+    font-family: arial, sans-serif;
 }
 
-.yahoo {
-/*  display: flex;
-  justify-content: flex-end;*/
-}
-
-.history {
-/*  display: flex;
-  justify-content: space-around;*/
+.main {
+	
 }
 
 .search {
-/*  display: flex;
-  justify-content: space-around;	*/
+
 }
+
+.search-list {
+  border:2px solid black;
+}
+
+.search-list-item {
+
+}
+
+.google-list {
+  border:2px solid black;
+}
+
+.google-list-item {
+
+}
+
+.yahoo-list {
+  border:2px solid black;
+}
+
+.yahoo-list-item {
+
+}
+
+/* 
+.history {
+  display: flex;
+  justify-content: space-around;
+}
+
+Use bootstrap to include styling in json for webpack to compile
+  - checkout styled components / material components / styled material componenets
+*/

@@ -1,7 +1,11 @@
-// re-render automatically
 // format in columns
 // make history clickable
-// use live data
-// limit max results
+// search when enter is hit
+// clear search bar after searching
+// add time stamp to search
+// fix random ordering of results from db
 
-// live data not working. looks like it could be an issue with the search term not feeding correctly
+
+
+
+

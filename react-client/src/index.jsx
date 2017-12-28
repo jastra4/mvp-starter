@@ -85,8 +85,8 @@ class App extends React.Component {
   }
 
   render () {
-    return (<div>
-      <h1>Search</h1>
+    return (<div className="main">
+      <h1>Searchify</h1>
         <Search onChange={this.onChange} refresh={this.refreshPage} search={this.search}/>
         <YahooList results={this.state.yahooResults}/>
         <GoogleList results={this.state.googleResults}/>
