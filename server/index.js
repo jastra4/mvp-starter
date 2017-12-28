@@ -5,7 +5,6 @@ var Promise = require('bluebird');
 var express = Promise.promisifyAll(require('express'));
 var bodyParser = require('body-parser');
 
-//var items = require('../database-mongo');
 var yahoos = require('../database-mongo');
 var googles = require('../database-mongo');
 
@@ -16,7 +15,6 @@ app.use(bodyParser());
 
 app.post('/query', function(req, res) {
   queryAPI.getSearchResults(req.body, function(googleResults, yahooResults) {
-    //console.log('googleResults: ',JSON.parse(googleResults));
     db.saveYahoo(JSON.parse(yahooResults), function() {
       db.saveGoogle(JSON.parse(googleResults), function() {
         db.saveHistory(req.body.term, function() {
@@ -26,7 +24,6 @@ app.post('/query', function(req, res) {
     });
   });
 });
-  //console.log('***RESULTS*** ', JSON.parse(results[0]));
 
 app.get('/clear', function(req, res) {
   db.clearHistory(function() {
@@ -34,7 +31,6 @@ app.get('/clear', function(req, res) {
   })
 });
 
-//app.get('/update', function(resolve, reject) {}).then(console.log('router worked'));
 
 app.get('/update', function (req, res) {
   db.selectAllGoogle(function(err, data) {
@@ -68,12 +64,3 @@ app.get('/yahoo', function (req, res) {
 app.listen(3000, function() {
   console.log('listening on port 3000!');
 });
-
-// save search term to db
-// display db info on clickable list
-// send post request to APIs on click
-
-// set up yahoo api
-// make display update automatically
-// limit results
-// order results

@@ -81,7 +81,7 @@ var clearHistory = function(callback) {
       console.log('clear error: ', err);
     } else {
       callback();
-      console.log('Searches collection deleted');
+      //console.log('Searches collection deleted');
     }
   });
 }
@@ -93,7 +93,7 @@ var saveGoogle = function(results, callback) {
     if (err) {
       console.log(err);
     } else {
-      console.log('Google collection deleted');
+      //console.log('Google collection deleted');
     }
   });
   results.forEach(function(result) {
@@ -103,7 +103,6 @@ var saveGoogle = function(results, callback) {
       snippet: result.snippet,
       link: result.link
     })  
-    //res.save().then(function() {callback()})
     res.save();
   });
   callback();
@@ -116,7 +115,7 @@ var saveYahoo = function(results, callback) {
     if (err) {
       console.log(err);
     } else {
-      console.log('Yahoo collection deleted');
+      //console.log('Yahoo collection deleted');
     }
   });
   results.forEach(function(result) {
@@ -126,7 +125,6 @@ var saveYahoo = function(results, callback) {
       snippet: result.snippet,
       link: result.link
     })    
-    //res.save().then(function() {callback()})
     res.save();
   });
   callback();
@@ -142,7 +140,7 @@ var saveHistory = function(term, callback) {
       console.log('search history save error: ',err);
     } else {
       callback();
-      console.log('Search history saved.');
+      //console.log('Search history saved.');
     }
   })
 }

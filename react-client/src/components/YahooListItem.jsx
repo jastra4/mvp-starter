@@ -11,6 +11,7 @@ const Link = styles.a`
 `;
 
 const Title = styles.div`
+  font-weight: bold;
 `;
 
 const YahooListItem = (props) => (

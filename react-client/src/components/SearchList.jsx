@@ -3,11 +3,12 @@ import styles from 'styled-components';
 import SearchListItem from './SearchListItem.jsx';
 
 const Wrapper = styles.div`
-  border:2px solid black;
+  border:1px solid black;
   display: inline-block;
   float: left;
-  width: 15%;
+  width: 10%;
   margin-right:1%;
+  text-align: center;
 `;
 
 const SearchList = (props) => (
